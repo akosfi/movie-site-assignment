@@ -1,5 +1,5 @@
-import Movie from "./Movie";
+import MovieSearchResult from "./MovieSearchResult";
 
 export default interface MovieRepository {
-    findByName: (name: string, page: number) => Promise<Movie[]>;
+    findByName: (name: string, page: number) => Promise<MovieSearchResult>;
 }

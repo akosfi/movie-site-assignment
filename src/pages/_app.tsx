@@ -5,13 +5,12 @@ import '../styles/globals.scss';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <>
+        <MoviesProvider>
             <Head>
-                <title>Fingertips Store</title>
+                <title>The Movie Site</title>
             </Head>
-            <MoviesProvider>
-                <Component {...pageProps} />
-            </MoviesProvider>
-        </>
+            <Component {...pageProps} />
+
+        </MoviesProvider>
     );
 }

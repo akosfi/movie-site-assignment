@@ -1,5 +1,6 @@
 import Movie from "../domain/Movie";
 import MovieRepository from "../domain/MovieRepository"
+import MovieSearchResult from "../domain/MovieSearchResult";
 
 export interface FindMovieByNameUseCaseRequest {
     movieRepository: MovieRepository;
@@ -9,7 +10,7 @@ export interface FindMovieByNameUseCaseRequest {
 
 
 export interface FindMovieByNameUseCaseResponse {
-    movies: Movie[];
+    movieSearchResult: MovieSearchResult;
 }
 
 export default class FindMovieByNameUseCase {
@@ -18,8 +19,8 @@ export default class FindMovieByNameUseCase {
     execute = async (): Promise<FindMovieByNameUseCaseResponse> => {
         const { movieRepository, name, page } = this.findMovieByNameUseCaseRequest;
 
-        const movies = await movieRepository.findByName(name, page);
+        const movieSearchResult = await movieRepository.findByName(name, page);
 
-        return { movies };
+        return { movieSearchResult };
     }
 }   

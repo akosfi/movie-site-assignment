@@ -1,5 +1,5 @@
 import { FC, ReactElement, useCallback, useState } from 'react';
-import moviesContext from './MoviesContext';
+import moviesContext, { MoviesContext } from './MoviesContext';
 import Movie from '../domain/Movie';
 import FindMovieByNameUseCase from '../useCases/findMovieByNameUseCase';
 import RemoteMovieRepository from '../remote/RemoteMovieRepository';
@@ -9,22 +9,16 @@ type MovieProviderProps = {
 };
 
 const MoviesProvider: FC<MovieProviderProps> = ({ children }) => {
-    const [movies, setMovies] = useState<Movie[]>([]);
-    const [totalPages, setTotalPages] = useState<number>(0);
-    const [page, setPage] = useState<number>(0);
-
-    //TODO: use 1 setState. They change together
+    const [moviesContextState, setMoviesContextState] = useState<Omit<MoviesContext, "fetchMovies">>({ movies: [], totalPages: 0, page: 0, resultOriginCount: { api: 0, cache: 0 } });
 
 
-    const fetchMovies = useCallback(async (name: string, page: number) => {
-        const { movies } = await new FindMovieByNameUseCase({ movieRepository: new RemoteMovieRepository(), name, page }).execute();
-        setMovies(movies);
-        setTotalPages(0);
-        setPage(0)
+    const fetchMovies = useCallback(async (name: string, requestedPage: number) => {
+        const { movieSearchResult: { movies, totalPages, page } } = await new FindMovieByNameUseCase({ movieRepository: new RemoteMovieRepository(), name, page: requestedPage }).execute();
+        setMoviesContextState({ movies, totalPages, page, resultOriginCount: { api: moviesContextState.resultOriginCount.api + 1, cache: 0 } })
     }, []);
 
     return (
-        <moviesContext.Provider value={{ movies, fetchMovies, totalPages: 0, page: 0 }}>
+        <moviesContext.Provider value={{ ...moviesContextState, fetchMovies }}>
             {children}
         </moviesContext.Provider>
     );

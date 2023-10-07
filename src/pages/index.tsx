@@ -1,19 +1,9 @@
-import { useMoviesContext } from "modules/movies";
-import { useState } from "react";
 
-const Index = () => {
+import { ListingPage as ListingPageContent } from "modules/movies/movie-listing-page";
+import { memo } from "react";
 
-    const [movieName, setMovieName] = useState("");
-    const [pageNumber, setPageNumber] = useState(1);
 
-    const { movies, fetchMovies } = useMoviesContext();
+const ListingPage = () => <ListingPageContent />;
 
-    return <div>
-        <input type="text" value={movieName} onChange={({ target: { value } }) => setMovieName(value)} />
-        <input type="number" value={pageNumber} onChange={({ target: { value } }) => setPageNumber(Number(value))} step={1} />
-        <div onClick={() => fetchMovies(movieName, pageNumber)}>Submit</div>
-        {JSON.stringify(movies)}
-    </div>;
-};
 
-export default Index;
+export default memo(ListingPage);

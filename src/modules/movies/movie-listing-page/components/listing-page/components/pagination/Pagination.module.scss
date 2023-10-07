@@ -1,0 +1,14 @@
+.pagination {
+    .page {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 16px;
+        font-size: 16px;
+        border: 1px solid gray;
+        margin: 0 8px 8px 0;
+        min-width: 16px;
+        height: 16px;
+        display: inline-block;
+        text-align: center;
+    }
+}
