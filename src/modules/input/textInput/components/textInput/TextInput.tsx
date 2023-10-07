@@ -17,11 +17,18 @@ type ButtonProps = {
     onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 };
 
-const TextInput: FC<ButtonProps> = ({ size, setValue, value, className, placeHolder = "", onKeyDown = () => null }) => (
+const TextInput: FC<ButtonProps> = ({
+    size,
+    setValue,
+    value,
+    className,
+    placeHolder = '',
+    onKeyDown = () => null,
+}) => (
     <input
-        type='text'
+        type="text"
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
         className={classNames(
             css['textInput'],
             css[`textInput-size-${size}`],

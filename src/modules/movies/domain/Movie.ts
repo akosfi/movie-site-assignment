@@ -1,9 +1,9 @@
 export interface MovieDTO {
-    id: number,
-    overview: string,
-    posterPath: string,
-    releaseDate: string,
-    title: string,
+    id: number;
+    overview: string;
+    posterPath: string;
+    releaseDate: string;
+    title: string;
 }
 
 export default class Movie implements MovieDTO {

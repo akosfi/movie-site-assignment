@@ -1,9 +1,9 @@
-import { FC, useMemo } from "react";
+import { FC, useMemo } from 'react';
 
 type EllipseProps = {
     label: string;
     length?: number;
-}
+};
 
 const Ellipse: FC<EllipseProps> = ({ label, length = 30 }) => {
     const ellipseContent = useMemo(() => {
@@ -11,9 +11,9 @@ const Ellipse: FC<EllipseProps> = ({ label, length = 30 }) => {
             return `${label.slice(0, length)}...`;
         }
         return label;
-    }, [label, length])
+    }, [label, length]);
 
     return <span>{ellipseContent}</span>;
-}
+};
 
 export default Ellipse;

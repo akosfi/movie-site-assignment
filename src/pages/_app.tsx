@@ -10,7 +10,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 <title>The Movie Site</title>
             </Head>
             <Component {...pageProps} />
-
         </MoviesProvider>
     );
 }

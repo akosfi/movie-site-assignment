@@ -1,11 +1,8 @@
 @import '../../../../../styles/breakpoints.scss';
 
-
-
 .layout {
     margin: 0 auto;
     width: calc(1 * 248px);
-
 
     @include tablet-up {
         width: calc(2 * 248px + 1 * 24px);
@@ -34,7 +31,6 @@
     }
 
     .fetchResult {
-
         background-color: #fb7b7b;
         color: black;
         margin-bottom: 16px;

@@ -8,7 +8,7 @@ type ListingItemProps = {
     movie: Movie;
 };
 
-const imageBaseUrl = "https://image.tmdb.org/t/p/w500";
+const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
 const ListingItem: FC<ListingItemProps> = ({ movie }) => (
     <Card className={css['card']}>
@@ -16,10 +16,13 @@ const ListingItem: FC<ListingItemProps> = ({ movie }) => (
             <img src={`${imageBaseUrl}/${movie.posterPath}`} alt="item image" />
         </div>
 
-
-        <p className={css['name']}><Ellipse label={movie.title} length={20} /></p>
+        <p className={css['name']}>
+            <Ellipse label={movie.title} length={20} />
+        </p>
         <p className={css['releaseDate']}>{movie.releaseDate}</p>
-        <p className={css['overview']}><Ellipse label={movie.overview} length={100} /></p>
+        <p className={css['overview']}>
+            <Ellipse label={movie.overview} length={100} />
+        </p>
     </Card>
 );
 

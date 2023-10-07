@@ -1,1 +1,4 @@
-export { default as TextInput, TextInputSize } from './components/textInput/TextInput';
+export {
+    default as TextInput,
+    TextInputSize,
+} from './components/textInput/TextInput';
