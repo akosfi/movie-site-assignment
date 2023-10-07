@@ -10,6 +10,7 @@ export type MoviesContext = {
         cache: number;
         api: number;
     }
+    isSearchInProgress: boolean;
 }
 
 const moviesContext = createContext<MoviesContext>({
@@ -20,7 +21,8 @@ const moviesContext = createContext<MoviesContext>({
     resultOriginCount: {
         cache: 0,
         api: 0
-    }
+    },
+    isSearchInProgress: false
 });
 
 export default moviesContext;

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, KeyboardEventHandler } from 'react';
 import classNames from 'classnames';
 
 import css from './TextInput.module.scss';
@@ -14,9 +14,10 @@ type ButtonProps = {
     size: TextInputSize;
     className?: string;
     placeHolder?: string;
+    onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 };
 
-const TextInput: FC<ButtonProps> = ({ size, setValue, value, className, placeHolder = "" }) => (
+const TextInput: FC<ButtonProps> = ({ size, setValue, value, className, placeHolder = "", onKeyDown = () => null }) => (
     <input
         type='text'
         value={value}
@@ -27,6 +28,7 @@ const TextInput: FC<ButtonProps> = ({ size, setValue, value, className, placeHol
             className,
         )}
         placeholder={placeHolder}
+        onKeyDown={onKeyDown}
     />
 );
 
