@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import MovieRepository from '../../domain/MovieRepository';
+import MovieRepository from '../../../domain/MovieRepository';
 
 type APIMovieDTO = {
     id: number;
