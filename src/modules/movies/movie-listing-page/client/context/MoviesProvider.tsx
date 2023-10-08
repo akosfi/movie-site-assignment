@@ -29,21 +29,29 @@ const MoviesProvider: FC<MovieProviderProps> = ({ children }) => {
                 isSearchInProgress: true,
             });
             const {
-                movieSearchResult: { movies, totalPages, page },
+                movieSearchResult: { movies, totalPages, page, origin },
             } = await new FindMovieByNameUseCase({
                 movieRepository: new RemoteMovieRepository(),
                 name,
                 page: requestedPage,
             }).execute();
 
+            const newResultOriginCount =
+                origin === 'EXTERNAL'
+                    ? {
+                          ...moviesContextState.resultOriginCount,
+                          api: moviesContextState.resultOriginCount.api + 1,
+                      }
+                    : {
+                          ...moviesContextState.resultOriginCount,
+                          cache: moviesContextState.resultOriginCount.cache + 1,
+                      };
+
             setMoviesContextState({
                 movies,
                 totalPages,
                 page,
-                resultOriginCount: {
-                    api: moviesContextState.resultOriginCount.api + 1,
-                    cache: 0,
-                },
+                resultOriginCount: newResultOriginCount,
                 isSearchInProgress: false,
             });
         },

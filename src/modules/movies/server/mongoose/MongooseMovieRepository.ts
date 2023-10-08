@@ -2,6 +2,7 @@ import MovieRepository from 'modules/movies/domain/MovieRepository';
 import TheMovieDatabaseRepository from '../theMovieDatabase/TheMovieDatabaseRepository';
 import MongooseMovieSearchResult from './MongooseMovieSearchResult';
 import mongoose from 'mongoose';
+import MovieSearchResult from 'modules/movies/domain/MovieSearchResult';
 
 export default class MongooseMovieRepository implements MovieRepository {
     constructor(
@@ -30,7 +31,15 @@ export default class MongooseMovieRepository implements MovieRepository {
                 cachedMovieSearchResult.hit += 1;
                 await cachedMovieSearchResult.save();
 
-                return JSON.parse(cachedMovieSearchResult.originalSearchResult);
+                const parsedOriginalSearchResult = JSON.parse(
+                    cachedMovieSearchResult.originalSearchResult,
+                );
+                return new MovieSearchResult(
+                    parsedOriginalSearchResult.movies,
+                    parsedOriginalSearchResult.page,
+                    parsedOriginalSearchResult.totalPages,
+                    'CACHED',
+                );
             } else {
                 await MongooseMovieSearchResult.findByIdAndDelete(
                     cachedMovieSearchResult?.id,

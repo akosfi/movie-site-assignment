@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import MovieRepository from 'modules/movies/domain/MovieRepository';
+import MovieSearchResult from 'modules/movies/domain/MovieSearchResult';
 
 type APIMovieDTO = {
     id: number;
@@ -27,14 +28,15 @@ export default class TheMovieDatabaseRepository implements MovieRepository {
             },
         );
 
-        return {
-            movies: results.map((apiMovie) => ({
+        return new MovieSearchResult(
+            results.map((apiMovie) => ({
                 ...apiMovie,
                 releaseDate: apiMovie.release_date,
                 posterPath: apiMovie.poster_path,
             })),
             page,
-            totalPages: total_pages,
-        };
+            total_pages,
+            'EXTERNAL',
+        );
     };
 }
