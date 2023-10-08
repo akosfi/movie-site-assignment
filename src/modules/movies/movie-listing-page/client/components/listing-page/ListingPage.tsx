@@ -4,8 +4,8 @@ import ListingItem from './components/listing-item/ListingItem';
 
 import css from './ListingPage.module.scss';
 import { useMoviesContext } from 'modules/movies/client';
-import { Button, ButtonSize } from 'modules/input/button/client';
-import { TextInput, TextInputSize } from 'modules/input/textInput/client';
+import { Button, ButtonSize } from 'modules/input/button';
+import { TextInput, TextInputSize } from 'modules/input/textInput';
 import Pagination from './components/pagination/Pagination';
 
 const ListingPage: FC = () => {
