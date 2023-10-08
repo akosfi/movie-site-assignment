@@ -1,6 +1,13 @@
 import { ListingPage as ListingPageContent } from 'modules/movies/movie-listing-page/client';
-import { memo } from 'react';
+import Head from 'next/head';
 
-const ListingPage = () => <ListingPageContent />;
+const ListingPage = () => (
+    <>
+        <Head>
+            <title>The Movie Site</title>
+        </Head>
+        <ListingPageContent />
+    </>
+);
 
-export default memo(ListingPage);
+export default ListingPage;

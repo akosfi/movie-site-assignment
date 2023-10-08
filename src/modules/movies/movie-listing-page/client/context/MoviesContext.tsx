@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import Movie from '../../domain/Movie';
+import Movie from '../../../domain/Movie';
 
 export type MoviesContext = {
     movies: Movie[];

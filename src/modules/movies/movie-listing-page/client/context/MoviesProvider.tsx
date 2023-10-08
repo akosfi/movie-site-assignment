@@ -1,6 +1,6 @@
 import { FC, ReactElement, useCallback, useState } from 'react';
 import moviesContext, { MoviesContext } from './MoviesContext';
-import RemoteMovieRepository from '../remote/RemoteMovieRepository';
+import RemoteMovieRepository from '../../../client/remote/RemoteMovieRepository';
 import { FindMovieByNameUseCase } from 'modules/movies/movie-listing-page';
 
 type MovieProviderProps = {
