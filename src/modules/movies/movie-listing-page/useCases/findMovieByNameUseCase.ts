@@ -1,5 +1,5 @@
-import MovieRepository from '../domain/MovieRepository';
-import MovieSearchResult from '../domain/MovieSearchResult';
+import MovieRepository from '../../domain/MovieRepository';
+import MovieSearchResult from '../../domain/MovieSearchResult';
 
 export interface FindMovieByNameUseCaseRequest {
     movieRepository: MovieRepository;
