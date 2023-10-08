@@ -1,4 +1,4 @@
-import { MoviesProvider } from 'modules/movies';
+import { MoviesProvider } from 'modules/movies/client';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import '../styles/globals.scss';

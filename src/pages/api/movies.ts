@@ -1,7 +1,9 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { FindMovieByNameUseCase } from 'modules/movies/movie-listing-page';
-import MongooseMovieRepository from 'modules/movies/infrastructure/server/mongoose/MongooseMovieRepository';
-import TheMovieDatabaseRepository from 'modules/movies/infrastructure/server/theMovieDatabase/TheMovieDatabaseRepository';
+import {
+    MongooseMovieRepository,
+    TheMovieDatabaseRepository,
+} from 'modules/movies/server';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
     const { movieSearchResult } = await new FindMovieByNameUseCase({

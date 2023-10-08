@@ -3,9 +3,9 @@ import { FC, KeyboardEventHandler, memo, useMemo, useState } from 'react';
 import ListingItem from './components/listing-item/ListingItem';
 
 import css from './ListingPage.module.scss';
-import { useMoviesContext } from 'modules/movies';
-import { Button, ButtonSize } from 'modules/input/button';
-import { TextInput, TextInputSize } from 'modules/input/textInput';
+import { useMoviesContext } from 'modules/movies/client';
+import { Button, ButtonSize } from 'modules/input/button/client';
+import { TextInput, TextInputSize } from 'modules/input/textInput/client';
 import Pagination from './components/pagination/Pagination';
 
 const ListingPage: FC = () => {

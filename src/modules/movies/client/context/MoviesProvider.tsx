@@ -1,7 +1,7 @@
 import { FC, ReactElement, useCallback, useState } from 'react';
 import moviesContext, { MoviesContext } from './MoviesContext';
-import { FindMovieByNameUseCase } from '../movie-listing-page';
-import RemoteMovieRepository from '../infrastructure/client/RemoteMovieRepository';
+import RemoteMovieRepository from '../remote/RemoteMovieRepository';
+import { FindMovieByNameUseCase } from 'modules/movies/movie-listing-page';
 
 type MovieProviderProps = {
     children: ReactElement | ReactElement[];

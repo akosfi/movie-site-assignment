@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Card } from 'modules/data-display/card';
-import { Movie } from 'modules/movies';
+import { Movie } from 'modules/movies/client';
 import css from './ListingItem.module.scss';
 import { Ellipse } from 'modules/data-display/ellipse';
 

@@ -1,4 +1,4 @@
-import { ListingPage as ListingPageContent } from 'modules/movies/movie-listing-page';
+import { ListingPage as ListingPageContent } from 'modules/movies/movie-listing-page/client';
 import { memo } from 'react';
 
 const ListingPage = () => <ListingPageContent />;
