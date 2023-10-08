@@ -14,13 +14,28 @@ export default class MongooseMovieRepository implements MovieRepository {
         const cachedMovieSearchResult = await MongooseMovieSearchResult.findOne(
             { name, page },
         );
+
         if (
             cachedMovieSearchResult &&
-            cachedMovieSearchResult.originalSearchResult
+            cachedMovieSearchResult.originalSearchResult &&
+            typeof cachedMovieSearchResult.hit !== 'undefined' &&
+            typeof cachedMovieSearchResult.timestamp !== 'undefined'
         ) {
-            console.log('from cache');
+            const elapsedMinutesSinceFirstCached =
+                (new Date().getTime() - cachedMovieSearchResult.timestamp) /
+                1000 /
+                60;
 
-            return JSON.parse(cachedMovieSearchResult.originalSearchResult);
+            if (elapsedMinutesSinceFirstCached <= 2) {
+                cachedMovieSearchResult.hit += 1;
+                await cachedMovieSearchResult.save();
+
+                return JSON.parse(cachedMovieSearchResult.originalSearchResult);
+            } else {
+                await MongooseMovieSearchResult.findByIdAndDelete(
+                    cachedMovieSearchResult?.id,
+                );
+            }
         }
 
         const movieSearchResult =
@@ -32,7 +47,7 @@ export default class MongooseMovieRepository implements MovieRepository {
                 page,
                 hit: 0,
                 originalSearchResult: JSON.stringify(movieSearchResult),
-                timestamp: String,
+                timestamp: new Date().getTime(),
             })
         ).save();
 
