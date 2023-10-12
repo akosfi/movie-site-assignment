@@ -2,7 +2,7 @@ import { FC } from 'react';
 import css from './ListingItem.module.scss';
 import { Card } from 'client/modules/data-display/card';
 import { Ellipse } from 'client/modules/data-display/ellipse';
-import { Movie } from 'core/movies';
+import { Movie } from 'core/modules/movies';
 
 type ListingItemProps = {
     movie: Movie;

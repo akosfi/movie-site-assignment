@@ -1,7 +1,11 @@
 import { FC, ReactElement, useCallback, useState } from 'react';
 import moviesContext, { MoviesContext } from './MoviesContext';
 import RemoteMovieRepository from '../remote/RemoteMovieRepository';
-import { FindMovieUseCase, MovieSearchRequest } from 'core/movies';
+import {
+    FindMovieUseCase,
+    MovieSearchRequest,
+    ResultOrigin,
+} from 'core/modules/movies';
 
 type MovieProviderProps = {
     children: ReactElement | ReactElement[];
@@ -29,7 +33,7 @@ const MoviesProvider: FC<MovieProviderProps> = ({ children }) => {
                 isSearchInProgress: true,
             });
             const {
-                movieSearchResult: { movies, totalPages, page },
+                movieSearchResult: { movies, totalPages, page, origin },
             } = await new FindMovieUseCase({
                 movieRepository: new RemoteMovieRepository(),
                 movieSearchRequest: new MovieSearchRequest(name, requestedPage),
@@ -39,10 +43,18 @@ const MoviesProvider: FC<MovieProviderProps> = ({ children }) => {
                 movies,
                 totalPages,
                 page,
-                resultOriginCount: {
-                    api: moviesContextState.resultOriginCount.api + 1,
-                    cache: 0,
-                },
+                resultOriginCount:
+                    origin === ResultOrigin.CACHED
+                        ? {
+                              api: moviesContextState.resultOriginCount.api,
+                              cache:
+                                  moviesContextState.resultOriginCount.cache +
+                                  1,
+                          }
+                        : {
+                              api: moviesContextState.resultOriginCount.api + 1,
+                              cache: moviesContextState.resultOriginCount.cache,
+                          },
                 isSearchInProgress: false,
             });
         },
