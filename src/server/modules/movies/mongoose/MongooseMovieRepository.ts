@@ -6,7 +6,6 @@ import {
 } from 'core/modules/movies';
 import TheMovieDatabaseRepository from '../theMovieDatabase/TheMovieDatabaseRepository';
 import MongooseMovieSearchResult from './MongooseMovieSearchResult';
-import mongoose from 'mongoose';
 
 export default class MongooseMovieRepository implements MovieRepository {
     constructor(
@@ -14,8 +13,6 @@ export default class MongooseMovieRepository implements MovieRepository {
     ) {}
 
     find = async (movieSearchRequest: MovieSearchRequest) => {
-        await mongoose.connect('mongodb://127.0.0.1:27017/movieCache');
-
         const cachedMovieSearchResult = await MongooseMovieSearchResult.findOne(
             { name: movieSearchRequest.name, page: movieSearchRequest.page },
         );
