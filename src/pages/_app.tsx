@@ -1,7 +1,7 @@
-import { MoviesProvider } from 'modules/movies';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import '../styles/globals.scss';
+import '../client/styles/globals.scss';
+import { MoviesProvider } from 'client/modules/movies';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     return (

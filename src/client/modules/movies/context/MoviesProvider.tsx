@@ -1,7 +1,7 @@
 import { FC, ReactElement, useCallback, useState } from 'react';
 import moviesContext, { MoviesContext } from './MoviesContext';
-import { FindMovieByNameUseCase } from '../movie-listing-page';
-import RemoteMovieRepository from '../infrastructure/client/RemoteMovieRepository';
+import RemoteMovieRepository from '../remote/RemoteMovieRepository';
+import { FindMovieUseCase, MovieSearchRequest } from 'core/movies';
 
 type MovieProviderProps = {
     children: ReactElement | ReactElement[];
@@ -30,10 +30,9 @@ const MoviesProvider: FC<MovieProviderProps> = ({ children }) => {
             });
             const {
                 movieSearchResult: { movies, totalPages, page },
-            } = await new FindMovieByNameUseCase({
+            } = await new FindMovieUseCase({
                 movieRepository: new RemoteMovieRepository(),
-                name,
-                page: requestedPage,
+                movieSearchRequest: new MovieSearchRequest(name, requestedPage),
             }).execute();
 
             setMoviesContextState({

@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
-import MovieRepository from '../../domain/MovieRepository';
+import { MovieRepository } from 'core/movies';
+import { MovieSearchRequest } from 'core/movies';
 
 type APIMovieDTO = {
     id: number;
@@ -10,7 +11,7 @@ type APIMovieDTO = {
 };
 
 export default class TheMovieDatabaseRepository implements MovieRepository {
-    findByName = async (name: string, requestedPage: number) => {
+    find = async (movieSearchRequest: MovieSearchRequest) => {
         const {
             data: { page, results, total_pages },
         }: AxiosResponse<{
@@ -18,7 +19,7 @@ export default class TheMovieDatabaseRepository implements MovieRepository {
             results: APIMovieDTO[];
             total_pages: number;
         }> = await axios.get(
-            `https://api.themoviedb.org/3/search/movie?query=${name}&include_adult=false&language=en-US&page=${requestedPage}`,
+            `https://api.themoviedb.org/3/search/movie?query=${movieSearchRequest.name}&include_adult=false&language=en-US&page=${movieSearchRequest.page}`,
             {
                 headers: {
                     Authorization: `Bearer ${process.env.MOVIE_DB_ACCESS_TOKEN}`,

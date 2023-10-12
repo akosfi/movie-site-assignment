@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Card } from 'modules/data-display/card';
-import { Movie } from 'modules/movies';
 import css from './ListingItem.module.scss';
-import { Ellipse } from 'modules/data-display/ellipse';
+import { Card } from 'client/modules/data-display/card';
+import { Ellipse } from 'client/modules/data-display/ellipse';
+import { Movie } from 'core/movies';
 
 type ListingItemProps = {
     movie: Movie;

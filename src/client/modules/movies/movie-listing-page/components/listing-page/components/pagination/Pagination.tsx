@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
+import { useMoviesContext } from 'client/modules/movies';
+
 import css from './Pagination.module.scss';
-import useMoviesContext from 'modules/movies/context/useMoviesContext';
 
 type PaginationProps = {
     onPageChangeRequested: (newPage: number) => void;

@@ -1,12 +1,12 @@
 import { FC, KeyboardEventHandler, memo, useMemo, useState } from 'react';
 
 import ListingItem from './components/listing-item/ListingItem';
+import Pagination from './components/pagination/Pagination';
+import { Button, ButtonSize } from 'client/modules/input/button';
+import { TextInput, TextInputSize } from 'client/modules/input/textInput';
+import { useMoviesContext } from 'client/modules/movies';
 
 import css from './ListingPage.module.scss';
-import { useMoviesContext } from 'modules/movies';
-import { Button, ButtonSize } from 'modules/input/button';
-import { TextInput, TextInputSize } from 'modules/input/textInput';
-import Pagination from './components/pagination/Pagination';
 
 const ListingPage: FC = () => {
     const [movieName, setMovieName] = useState('Annabelle');
