@@ -2,9 +2,9 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'client/redux/store';
 import { Movie } from 'core/modules/movies';
 
-const getState = (state: RootState) => state.movies;
+const getState = (state: RootState) => state.movieListingPage;
 
-const getMovieDTOs = (state: RootState) => state.movies.movies;
+const getMovieDTOs = (state: RootState) => getState(state).movies;
 
 const getMovies = createSelector(getMovieDTOs, (moviesDTOs) =>
     moviesDTOs.map((movieDTO) => new Movie(movieDTO)),
@@ -18,12 +18,27 @@ const getResultOriginCount = (state: RootState) =>
 const getIsSearchInProgress = (state: RootState) =>
     getState(state).isSearchInProgress;
 
+const getFavouriteMovieDTOs = (state: RootState) => getState(state).favourites;
+
+const getFavouriteMovies = createSelector(
+    getFavouriteMovieDTOs,
+    (favouriteMovieDTOs) =>
+        favouriteMovieDTOs.map(
+            (favouriteMovieDTO) => new Movie(favouriteMovieDTO),
+        ),
+);
+
+const createGetIsAddedToFavourites = (movie: Movie) => (state: RootState) =>
+    !!getFavouriteMovies(state).find(({ id }) => id === movie.id);
+
 const selectors = {
     getMovies,
     getTotalPages,
     getPage,
     getResultOriginCount,
     getIsSearchInProgress,
+    getFavouriteMovies,
+    createGetIsAddedToFavourites,
 };
 
 export default selectors;

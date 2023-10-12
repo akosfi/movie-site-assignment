@@ -3,6 +3,7 @@ import css from './ListingItem.module.scss';
 import { Card } from 'client/modules/data-display/card';
 import { Ellipse } from 'client/modules/data-display/ellipse';
 import { Movie } from 'core/modules/movies';
+import FavouriteButton from './components/favourite-button/FavouriteButton';
 
 type ListingItemProps = {
     movie: Movie;
@@ -17,6 +18,7 @@ const ListingItem: FC<ListingItemProps> = ({ movie }) => {
 
     return (
         <Card className={css['card']}>
+            <FavouriteButton movie={movie} />
             <div className={css['image']}>
                 {!imageLoadFailed ? (
                     <img

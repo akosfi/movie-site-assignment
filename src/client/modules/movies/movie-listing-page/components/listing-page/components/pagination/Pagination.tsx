@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import selectors from 'client/modules/movies/redux/selectors';
 import { useSelector } from 'react-redux';
+import selectors from 'client/modules/movies/movie-listing-page/redux/selectors';
 
 import css from './Pagination.module.scss';
 

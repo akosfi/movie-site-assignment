@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { moviesReducer } from 'client/modules/movies';
+import { movieListingPageReducer } from 'client/modules/movies/movie-listing-page';
 
 export const store = configureStore({
     reducer: {
-        movies: moviesReducer,
+        movieListingPage: movieListingPageReducer,
     },
 });
 

@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { MovieDTO, ResultOrigin } from 'core/modules/movies';
 import findMoviesThunk from './thunks/findMoviesThunk';
 
-export interface MoviesState {
+export interface MovieListingPageState {
     movies: MovieDTO[];
     page: number;
     totalPages: number;
@@ -12,9 +12,10 @@ export interface MoviesState {
     };
     isSearchInProgress: boolean;
     error?: string;
+    favourites: MovieDTO[];
 }
 
-const initialState: MoviesState = {
+const initialState: MovieListingPageState = {
     movies: [],
     page: 0,
     totalPages: 0,
@@ -24,12 +25,20 @@ const initialState: MoviesState = {
     },
     isSearchInProgress: false,
     error: undefined,
+    favourites: [],
 };
 
-export const moviesSlice = createSlice({
-    name: 'movies',
+export const movieListingPageSlice = createSlice({
+    name: 'movieListingPage',
     initialState,
-    reducers: {},
+    reducers: {
+        setFavourites(
+            state,
+            { payload: { movies } }: PayloadAction<{ movies: MovieDTO[] }>,
+        ) {
+            state.favourites = movies;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(findMoviesThunk.pending, (state) => {
             state.isSearchInProgress = true;
@@ -57,4 +66,6 @@ export const moviesSlice = createSlice({
     },
 });
 
-export default moviesSlice.reducer;
+export const { actions } = movieListingPageSlice;
+
+export default movieListingPageSlice.reducer;

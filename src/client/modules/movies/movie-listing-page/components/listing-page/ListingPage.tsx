@@ -6,19 +6,17 @@ import {
     useMemo,
     useState,
 } from 'react';
-
-import ListingItem from './components/listing-item/ListingItem';
+import { useDispatch, useSelector } from 'react-redux';
 import Pagination from './components/pagination/Pagination';
 import { Button, ButtonSize } from 'client/modules/input/button';
 import { TextInput, TextInputSize } from 'client/modules/input/textInput';
-
-import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'client/redux/store';
-
-import css from './ListingPage.module.scss';
-import findMoviesThunk from 'client/modules/movies/redux/thunks/findMoviesThunk';
+import findMoviesThunk from '../../redux/thunks/findMoviesThunk';
 import { MovieSearchRequest } from 'core/modules/movies';
-import selectors from 'client/modules/movies/redux/selectors';
+import selectors from '../../redux/selectors';
+import css from './ListingPage.module.scss';
+import MovieList from './components/movie-list/MovieList';
+import Favourites from './components/favourites/Favourites';
 
 const ListingPage: FC = () => {
     const [movieName, setMovieName] = useState('Annabelle');
@@ -54,7 +52,7 @@ const ListingPage: FC = () => {
         }
     };
 
-    const listFramgent = useMemo(() => {
+    const listFragment = useMemo(() => {
         if (isSearchInProgress) {
             return (
                 <div className={css['spinner-area']}>
@@ -62,13 +60,14 @@ const ListingPage: FC = () => {
                 </div>
             );
         }
+
+        if (!movies.length) {
+            return null;
+        }
+
         return (
             <>
-                <div className={css['movies']}>
-                    {movies.map((movie) => (
-                        <ListingItem movie={movie} key={movie.id} />
-                    ))}
-                </div>
+                <MovieList movies={movies} title="Search results" />
 
                 <Pagination
                     onPageChangeRequested={(newPage) =>
@@ -82,6 +81,8 @@ const ListingPage: FC = () => {
     return (
         <div className={css['layout']}>
             <h1 className={css['siteName']}>The Movie Site</h1>
+
+            <Favourites />
 
             <div className={css['movieSearch']}>
                 <TextInput
@@ -103,7 +104,7 @@ const ListingPage: FC = () => {
                 {`${resultOriginCount.api} / ${resultOriginCount.cache}`}
             </p>
 
-            {listFramgent}
+            {listFragment}
         </div>
     );
 };
