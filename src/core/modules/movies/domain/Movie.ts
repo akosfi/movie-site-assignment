@@ -20,4 +20,12 @@ export default class Movie implements MovieDTO {
         this.releaseDate = releaseDate;
         this.title = title;
     }
+
+    serialize = (): MovieDTO => ({
+        id: this.id,
+        overview: this.overview,
+        posterPath: this.posterPath,
+        releaseDate: this.releaseDate,
+        title: this.title,
+    });
 }

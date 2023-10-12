@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { useMoviesContext } from 'client/modules/movies';
+import selectors from 'client/modules/movies/redux/selectors';
+import { useSelector } from 'react-redux';
 
 import css from './Pagination.module.scss';
 
@@ -9,7 +10,8 @@ type PaginationProps = {
 };
 
 const Pagination: FC<PaginationProps> = ({ onPageChangeRequested }) => {
-    const { totalPages, page: currentPage } = useMoviesContext();
+    const totalPages = useSelector(selectors.getTotalPages);
+    const currentPage = useSelector(selectors.getPage);
 
     return (
         <div className={css['pagination']}>
