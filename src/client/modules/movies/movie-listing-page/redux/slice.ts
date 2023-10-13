@@ -42,6 +42,7 @@ export const movieListingPageSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(findMoviesThunk.pending, (state) => {
             state.isSearchInProgress = true;
+            state.error = undefined;
         });
         builder.addCase(findMoviesThunk.fulfilled, (state, action) => {
             state.isSearchInProgress = false;

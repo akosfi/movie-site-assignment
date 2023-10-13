@@ -23,18 +23,24 @@ const ListingPage: FC = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const findMovies = useCallback(
-        (name: string, page: number) =>
+        (name: string, page: number) => {
+            if (!name) {
+                return;
+            }
+
             dispatch(
                 findMoviesThunk({
                     movieSearchRequest: new MovieSearchRequest(name, page),
                 }),
-            ),
+            );
+        },
         [dispatch],
     );
 
     const isSearchInProgress = useSelector(selectors.getIsSearchInProgress);
     const movies = useSelector(selectors.getMovies);
     const resultOriginCount = useSelector(selectors.getResultOriginCount);
+    const error = useSelector(selectors.getError);
 
     const handleMovieNameChange = (name: string) => {
         setMovieName(name);
@@ -64,6 +70,10 @@ const ListingPage: FC = () => {
             );
         }
 
+        if (error) {
+            return <p className={css['error']}>{error}</p>;
+        }
+
         if (!movies.length) {
             return null;
         }
@@ -83,7 +93,7 @@ const ListingPage: FC = () => {
                 />
             </>
         );
-    }, [isSearchInProgress, findMovies, movieName, movies]);
+    }, [isSearchInProgress, findMovies, movieName, movies, error]);
 
     return (
         <div className={css['layout']}>

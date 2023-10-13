@@ -20,6 +20,8 @@ const getIsSearchInProgress = (state: RootState) =>
 
 const getFavouriteMovieDTOs = (state: RootState) => getState(state).favourites;
 
+const getError = (state: RootState) => getState(state).error;
+
 const getFavouriteMovies = createSelector(
     getFavouriteMovieDTOs,
     (favouriteMovieDTOs) =>
@@ -39,6 +41,7 @@ const selectors = {
     getIsSearchInProgress,
     getFavouriteMovies,
     createGetIsAddedToFavourites,
+    getError,
 };
 
 export default selectors;

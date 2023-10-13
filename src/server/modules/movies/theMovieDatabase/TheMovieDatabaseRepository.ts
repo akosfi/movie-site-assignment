@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import {
+    Movie,
     MovieRepository,
     MovieSearchRequest,
     MovieSearchResult,
@@ -33,11 +34,14 @@ export default class TheMovieDatabaseRepository implements MovieRepository {
         );
 
         return new MovieSearchResult(
-            results.map((apiMovie) => ({
-                ...apiMovie,
-                releaseDate: apiMovie.release_date,
-                posterPath: apiMovie.poster_path,
-            })),
+            results.map(
+                (apiMovie) =>
+                    new Movie({
+                        ...apiMovie,
+                        releaseDate: apiMovie.release_date,
+                        posterPath: apiMovie.poster_path,
+                    }),
+            ),
             page,
             total_pages,
             ResultOrigin.EXTERNAL,
