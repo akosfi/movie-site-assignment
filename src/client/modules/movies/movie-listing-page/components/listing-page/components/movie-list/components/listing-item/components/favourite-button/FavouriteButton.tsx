@@ -8,9 +8,10 @@ import css from './FavouriteButton.module.scss';
 
 type FavouriteButtonProps = {
     movie: Movie;
+    testId?: string;
 };
 
-const FavouriteButton: FC<FavouriteButtonProps> = ({ movie }) => {
+const FavouriteButton: FC<FavouriteButtonProps> = ({ movie, testId }) => {
     const favourites = useSelector(selectors.getFavouriteMovies);
     const isAddedToFavourites = useSelector(
         selectors.createGetIsAddedToFavourites(movie),
@@ -40,6 +41,7 @@ const FavouriteButton: FC<FavouriteButtonProps> = ({ movie }) => {
         <div
             className={css['favourite-button']}
             onClick={handleFavouriteButtonClicked}
+            data-testid={testId}
         >
             {isAddedToFavourites ? (
                 <img src="/assets/star_filled.svg" />

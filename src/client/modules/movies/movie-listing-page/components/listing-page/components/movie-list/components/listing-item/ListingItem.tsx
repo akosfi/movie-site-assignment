@@ -7,18 +7,22 @@ import FavouriteButton from './components/favourite-button/FavouriteButton';
 
 type ListingItemProps = {
     movie: Movie;
+    testId?: string;
 };
 
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
-const ListingItem: FC<ListingItemProps> = ({ movie }) => {
+const ListingItem: FC<ListingItemProps> = ({ movie, testId }) => {
     const [imageLoadFailed, setImageLoadFailed] = useState(false);
 
     const handleImageLoadError = () => setImageLoadFailed(true);
 
     return (
-        <Card className={css['card']}>
-            <FavouriteButton movie={movie} />
+        <Card className={css['card']} testId={testId}>
+            <FavouriteButton
+                movie={movie}
+                testId={testId + '/favouriteButton'}
+            />
             <div className={css['image']}>
                 {!imageLoadFailed ? (
                     <img
@@ -31,7 +35,7 @@ const ListingItem: FC<ListingItemProps> = ({ movie }) => {
                 )}
             </div>
 
-            <p className={css['name']}>
+            <p className={css['name']} data-testId={testId + '/name'}>
                 <Ellipse label={movie.title} length={20} />
             </p>
             <p className={css['releaseDate']}>{movie.releaseDate}</p>

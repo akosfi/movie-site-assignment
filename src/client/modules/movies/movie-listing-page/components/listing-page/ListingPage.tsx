@@ -19,7 +19,7 @@ import MovieList from './components/movie-list/MovieList';
 import Favourites from './components/favourites/Favourites';
 
 const ListingPage: FC = () => {
-    const [movieName, setMovieName] = useState('Annabelle');
+    const [movieName, setMovieName] = useState('');
     const dispatch = useDispatch<AppDispatch>();
 
     const findMovies = useCallback(
@@ -56,7 +56,10 @@ const ListingPage: FC = () => {
         if (isSearchInProgress) {
             return (
                 <div className={css['spinner-area']}>
-                    <span className={css['spinner']} />
+                    <span
+                        className={css['spinner']}
+                        data-testid="movieListingPage/loadingSpinner"
+                    />
                 </div>
             );
         }
@@ -67,7 +70,11 @@ const ListingPage: FC = () => {
 
         return (
             <>
-                <MovieList movies={movies} title="Search results" />
+                <MovieList
+                    movies={movies}
+                    title="Search results"
+                    testId="movieListingPage/searchResultsList"
+                />
 
                 <Pagination
                     onPageChangeRequested={(newPage) =>
@@ -91,6 +98,7 @@ const ListingPage: FC = () => {
                     setValue={handleMovieNameChange}
                     placeHolder="Enter movie name"
                     onKeyDown={handleKeyPressedOnInput}
+                    testId="movieListingPage/searchInput"
                 />
                 <Button
                     onClick={() => findMovies(movieName, 1)}

@@ -15,6 +15,7 @@ type ButtonProps = {
     className?: string;
     placeHolder?: string;
     onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+    testId?: string;
 };
 
 const TextInput: FC<ButtonProps> = ({
@@ -24,6 +25,7 @@ const TextInput: FC<ButtonProps> = ({
     className,
     placeHolder = '',
     onKeyDown = () => null,
+    testId,
 }) => (
     <input
         type="text"
@@ -36,6 +38,7 @@ const TextInput: FC<ButtonProps> = ({
         )}
         placeholder={placeHolder}
         onKeyDown={onKeyDown}
+        data-testid={testId}
     />
 );
 

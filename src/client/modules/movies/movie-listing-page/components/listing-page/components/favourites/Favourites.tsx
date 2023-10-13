@@ -26,7 +26,13 @@ const Favourites: FC = () => {
         return null;
     }
 
-    return <MovieList movies={favourites} title="Favourites" />;
+    return (
+        <MovieList
+            movies={favourites}
+            title="Favourites"
+            testId="movieListingPage/favouritesList"
+        />
+    );
 };
 
 export default Favourites;

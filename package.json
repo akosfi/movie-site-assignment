@@ -4,7 +4,6 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
@@ -12,7 +11,8 @@
         "format:write": "prettier . --write",
         "lint:check": "eslint .",
         "prepare": "husky install",
-        "precommit:check": "npm run format:check && npm run lint:check"
+        "precommit:check": "npm run format:check && npm run lint:check",
+        "test": "playwright test"
     },
     "author": "",
     "license": "ISC",
@@ -20,6 +20,7 @@
         "@reduxjs/toolkit": "^1.9.7",
         "axios": "^1.5.1",
         "classnames": "^2.3.2",
+        "dotenv": "^16.3.1",
         "mongoose": "^7.6.1",
         "next": "^13.4.19",
         "react": "^18.2.0",
@@ -28,6 +29,7 @@
     },
     "devDependencies": {
         "@next/eslint-plugin-next": "^13.4.19",
+        "@playwright/test": "^1.39.0",
         "@types/axios": "^0.14.0",
         "@types/node": "20.6.0",
         "@types/react": "^18.2.21",
