@@ -40,6 +40,8 @@ If you run the site with the provided **docker-compose.yml** file (4/C), a Mongo
 npm run dev
 ```
 
+Application should be running on http://localhost:3000
+
 #### 4/B. Start the production server:
 
 ```bash
@@ -47,8 +49,12 @@ npm run build
 npm run start
 ```
 
+Application should be running on http://localhost:3000
+
 #### 4/C. Start the production server locally with the provided **docker-compose.yml**.
 
 ```bash
 docker-compose up
 ```
+
+Application should be running on http://localhost:$NODE_LOCAL_PORT

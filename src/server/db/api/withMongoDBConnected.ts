@@ -8,6 +8,7 @@ export default (nextAPIHandler: NextApiHandler) =>
             return await nextAPIHandler(...args);
         } catch (error) {
             const response = args[1];
+
             return response
                 .status(500)
                 .send({ message: 'Internal server error.' });
