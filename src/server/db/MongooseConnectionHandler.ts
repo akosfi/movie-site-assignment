@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export default class MongooseConnectionHandler {
     connect = async () => {
-        const mongodbURI = process.env.MONGODB_URI;
+        const mongodbURI = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DATABASE_NAME}?authSource=admin`;
 
         if (!mongodbURI) {
             throw new Error('Failed to connect to database.');
